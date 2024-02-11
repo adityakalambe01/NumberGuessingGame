@@ -22,32 +22,47 @@ public class MainGameController {
 
     static String levelNameRedirect;
 
+    static String playAgain;
+
+    static int score;
+
+    static int minusScore;
+
 
 
     @RequestMapping("beginnerLevelNumber")
     public String newNumberBeginner(Model model){
-        randomNumber = RandomNumberGeneratorService.getRandomNumber();
         chances = 10;
-        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
+        score = 100;
+        minusScore = 10;
+        playAgain = "beginnerLevelNumber";
         levelNameRedirect = "beginnerLevel";
+        randomNumber = RandomNumberGeneratorService.getRandomNumber();
+        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
         return pageRedirect.beginnerLevel();
     }
 
     @RequestMapping("intermediateLevelNumber")
     public String newNumberIntermediate(Model model){
-        randomNumber = RandomNumberGeneratorService.getRandomNumber();
         chances = 5;
-        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
+        score = 100;
+        minusScore = 20;
         levelNameRedirect = "intermediateLevel";
+        playAgain = "intermediateLevelNumber";
+        randomNumber = RandomNumberGeneratorService.getRandomNumber();
+        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
         return pageRedirect.intermediateLevel();
     }
 
     @RequestMapping("proLevelNumber")
     public String newNumberPro(Model model){
-        randomNumber = RandomNumberGeneratorService.getRandomNumber();
         chances = 1;
-        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
+        score = 100;
+        minusScore = 100;
         levelNameRedirect = "proLevel";
+        playAgain = "proLevelNumber";
+        randomNumber = RandomNumberGeneratorService.getRandomNumber();
+        model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
         return pageRedirect.proLevel();
     }
 
@@ -61,17 +76,22 @@ public class MainGameController {
     public String playGame(Integer numberInput, Model model){
 
         System.out.println("Your "+(chances)+" chances remaining!");
-
+        chances--;
 
         try {
+
 
             if (numberInput<randomNumber) {
                 model.addAttribute("numberCheckingMessage","My guessed number is greater than "+numberInput);
                 System.out.println("My guessed number is greater than "+numberInput);
+                score-=minusScore;
+                if (chances<=0) throw new Exception();
             }
             else if (numberInput>randomNumber) {
                 model.addAttribute("numberCheckingMessage","My guessed number is smaller than "+numberInput);
                 System.out.println("My guessed number is smaller than "+numberInput);
+                score-=minusScore;
+                if (chances<=0) throw new Exception();
             }else {
                 model.addAttribute("numberCheckingMessage","This is my guessed number");
                 model.addAttribute("greenColor","color:green;");
@@ -79,9 +99,12 @@ public class MainGameController {
                 throw new Exception();
             }
         }catch (Exception e){
-
+            System.out.println(score);
+            model.addAttribute("totalScore", "Your score is "+score);
+            model.addAttribute("playAgain",playAgain);
+            return pageRedirect.showScores();
         }
-        chances--;
+
         model.addAttribute("RemainingChances","Your "+(chances)+" chances remaining!");
 
         switch (levelNameRedirect){
@@ -89,6 +112,6 @@ public class MainGameController {
             case "intermediateLevel" : return pageRedirect.intermediateLevel();
             case "proLevel" : return pageRedirect.proLevel();
         }
-        return null;
+        return pageRedirect.showScores();
     }
 }

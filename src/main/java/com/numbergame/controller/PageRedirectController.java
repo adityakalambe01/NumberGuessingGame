@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageRedirectController {
+    @Autowired
+    GameModeService gameModeService;
     @RequestMapping("")
     public String welcomePage(){
         return "Welcome";
@@ -20,7 +22,10 @@ public class PageRedirectController {
     }
 
     @RequestMapping("allLevelsPage")
-    public String levels(){
+    public String levels(Model model){
+        String username = (String) UserController.httpSession.getAttribute("username");
+        model.addAttribute("WelcomeMessage","Welcome "+username.toUpperCase() +" to the number guessing game!");
+        model.addAttribute("gameModes", gameModeService.getAllGameModes());
         return "AllLevels";
     }
 
@@ -44,5 +49,10 @@ public class PageRedirectController {
     @RequestMapping("Pro")
     public String proLevel(){
         return "level/Pro";
+    }
+
+    @RequestMapping("showScore")
+    public String showScores(){
+        return "scores/ShowPoints";
     }
 }

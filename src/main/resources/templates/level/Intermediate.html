@@ -66,7 +66,7 @@
 <form method="post">
     <input type="text" value="Guess the number!" disabled>
     <input type="text" th:value="${RemainingChances}" disabled>
-    <input type="number" name="numberInput">
+    <input type="number" name="numberInput" required>
     <input type="submit" value="Check Number" formaction="checkNumberBeginner">
 </form>
 <script>

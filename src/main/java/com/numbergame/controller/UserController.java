@@ -30,11 +30,11 @@ public class UserController {
     public String userLogin(String username, HttpServletRequest request, Model model){
         httpSession = request.getSession();
         httpSession.setAttribute("userId", usersService.userLogin(username.toUpperCase()));
-        model.addAttribute("WelcomeMessage","Welcome "+username.toUpperCase() +" to the number guessing game!");
+        httpSession.setAttribute("username",username);
 
 //        new GameModeService().addDefaultLevels();
-        model.addAttribute("gameModes", gameModeService.getAllGameModes());
 
-        return pageRedirect.levels();
+
+        return pageRedirect.levels(model);
     }
 }
