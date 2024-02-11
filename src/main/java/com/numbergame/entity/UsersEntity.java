@@ -1,24 +1,26 @@
-package com.numbergame;
+package com.numbergame.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
+@NoArgsConstructor
 @Table(name = "users_data")
 public class UsersEntity {
     @Id
     @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "username")
     private String username;
 
-    
+    public UsersEntity(String username){
+        this.username = username;
+    }
 }

@@ -1,2 +1,4 @@
-package com.numbergame.controller;public class ScoreHistoryController {
+package com.numbergame.controller;
+
+public class ScoreHistoryController {
 }
