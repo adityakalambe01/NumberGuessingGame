@@ -1,7 +1,6 @@
 package com.numbergame.entity;
 
 import lombok.*;
-import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 
