@@ -17,6 +17,7 @@ public class UsersService {
         if (user==null){
             return userRepository.save(new UsersEntity(userName)).getUserId();
         }
+
         return user.getUserId();
     }
 }

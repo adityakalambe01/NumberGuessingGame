@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RandomNumberGeneratorService {
     public static int getRandomNumber(){
+
         int min = 1;
         int max = 100;
 

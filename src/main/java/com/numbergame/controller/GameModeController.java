@@ -19,7 +19,6 @@ public class GameModeController {
     @Autowired
     PageRedirectController pageRedirect;
 
-
     @RequestMapping(value = "mode/")
     public String getGameModeById( Long gameId){
         HttpSession httpSession = UserController.httpSession;

@@ -26,7 +26,6 @@ public class UserController {
     static HttpSession httpSession;
 
 
-
     @PostMapping("UserLogin")
     public String userLogin(String username, HttpServletRequest request, Model model){
         httpSession = request.getSession();

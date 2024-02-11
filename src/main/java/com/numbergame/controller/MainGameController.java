@@ -42,7 +42,6 @@ public class MainGameController {
         return pageRedirect.intermediateLevel();
     }
 
-
     @RequestMapping("proLevelNumber")
     public String newNumberPro(Model model){
         randomNumber = RandomNumberGeneratorService.getRandomNumber();
