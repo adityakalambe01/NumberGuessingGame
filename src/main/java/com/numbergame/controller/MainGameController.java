@@ -85,17 +85,24 @@ public class MainGameController {
                 model.addAttribute("numberCheckingMessage","My guessed number is greater than "+numberInput);
                 System.out.println("My guessed number is greater than "+numberInput);
                 score-=minusScore;
-                if (chances<=0) throw new Exception();
+                if (chances<=0) {
+                    model.addAttribute("givenRandomNumber", "The random number is "+randomNumber);
+                    throw new Exception();
+                }
             }
             else if (numberInput>randomNumber) {
                 model.addAttribute("numberCheckingMessage","My guessed number is smaller than "+numberInput);
                 System.out.println("My guessed number is smaller than "+numberInput);
                 score-=minusScore;
-                if (chances<=0) throw new Exception();
+                if (chances<=0) {
+                    model.addAttribute("givenRandomNumber", "The random number is "+randomNumber);
+                    throw new Exception();
+                }
             }else {
                 model.addAttribute("numberCheckingMessage","This is my guessed number");
                 model.addAttribute("greenColor","color:green;");
                 System.out.println("This is my guessed number");
+                model.addAttribute("givenRandomNumber","You guessed correct number!");
                 throw new Exception();
             }
         }catch (Exception e){
