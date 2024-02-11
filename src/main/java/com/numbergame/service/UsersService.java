@@ -1,4 +1,2 @@
-package com.numbergame.service;
-
-public class UsersService {
+package com.numbergame.service;public class UsersService {
 }

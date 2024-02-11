@@ -1,22 +1,24 @@
-package com.numbergame.entity;
+package com.numbergame;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Users {
+@Table(name = "users_data")
+public class UsersEntity {
     @Id
+    @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Integer userId;
 
+    @Column(name = "username")
     private String username;
+
+    
 }
